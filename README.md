@@ -26,7 +26,7 @@ yarn global add yo @pickel-project/generator-react-app
 ```
 
 ```sh
-yo @pickel-project/node-lib
+yo @pickel-project/react-app
 ```
 
 ## Development
