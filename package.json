@@ -1,0 +1,44 @@
+{
+  "name": "@pickel-project/generator-react-app",
+  "version": "0.0.1",
+  "description": "React Application bootstrap.",
+  "scripts": {
+    "start": "yarn run build:watch",
+    "test": "test",
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -p tsconfig.json -w"
+  },
+  "repository": "pickel-project/generator-react-app",
+  "keywords": [
+    "yeoman",
+    "react"
+  ],
+  "files": [
+    "generators"
+  ],
+  "main": "generators/index.js",
+  "author": {
+    "name": "Himenon",
+    "email": "k.himneo314@gmail.com",
+    "url": "https://twitter.com/Himenon"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pickel-project/generator-react-app/issues"
+  },
+  "homepage": "https://github.com/pickel-project/generator-react-app#readme",
+  "devDependencies": {
+    "@types/read-pkg-up": "^3.0.1",
+    "@types/underscore.string": "^0.0.33",
+    "@types/yeoman-generator": "^3.0.2",
+    "typescript": "^3.3.3"
+  },
+  "dependencies": {
+    "read-pkg-up": "^4.0.0",
+    "underscore.string": "^3.3.5",
+    "yeoman-generator": "^3.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "version": "0.1",
+  "language": "en-US",
+  "words": [
+    "commitlint",
+    "commitmsg",
+    "codecov",
+    "webhook"
+  ],
+  "flagWords": [
+      "hte"
+  ],
+  "ignoreWords": [],
+  "dictionaryDefinitions": [
+      {
+          "name": "cities",
+          "path": "./sampleDictionaries/cities.txt"
+      }
+  ],
+  "dictionaries": ["cities"],
+  "languageSettings": [
+      {
+          "languageId": "*",
+          "dictionaries": []
+      }
+  ]
+}

@@ -1,0 +1,12 @@
+.DS_Store
+lib
+coverage
+node_modules
+package-lock.json
+.env*
+*.log
+private_npm_cache
+generators/index.js
+*.js
+*.js.map
+*.d.ts

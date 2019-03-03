@@ -1,0 +1,26 @@
+sudo: false
+language: node_js
+branches:
+  only:
+  - master
+cache: yarn
+stages:
+- name: compile
+  if: branch = master AND type = pull_request
+- name: deploy
+  if: branch = master AND type = push
+jobs:
+  include:
+  - stage: compile
+    script: yarn build
+    node_js:
+    - '10'
+  - stage: deploy
+    script:
+    - yarn install
+    - yarn build
+    - echo '//registry.npmjs.org/:_authToken="${NPM_TOKEN}"' >> .npmrc
+    - npm publish
+    - cp .npmrc.template .npmrc
+    node_js:
+    - '10'
