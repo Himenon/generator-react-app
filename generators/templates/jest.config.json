@@ -1,9 +1,11 @@
 {
-  "automock": true,
+  "automock": false,
   "unmockedModulePathPatterns": ["<rootDir>/node_modules/*"],
   "roots": [
     "<rootDir>/src"
   ],
+  "testEnvironment": "jsdom",
+  "resolver": "jest-pnp-resolver",
   "globals": {
     "ts-jest": {
       "tsConfig": "tsconfig.json",
@@ -25,6 +27,8 @@
   ],
   "collectCoverage": true,
   "transform": {
-    "^.+\\.(ts|tsx)$": "ts-jest"
+    "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+    "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+    "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
   }
 }

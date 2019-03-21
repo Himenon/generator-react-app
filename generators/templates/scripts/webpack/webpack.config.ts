@@ -6,6 +6,8 @@ import * as commonConfig from "./common";
 import { minimizerPluginMap } from "./optimization";
 import { plugins } from "./plugins";
 import { rules as defaultRules } from "./rules";
+const PnpWebpackPlugin = require("pnp-webpack-plugin");
+const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
 
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== "false";
 const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== "false";
@@ -17,6 +19,8 @@ export const configFactory = (webpackEnv: "development" | "production"): webpack
   const publicPath = isEnvProduction ? paths.servedPath : isEnvDevelopment && "/";
   const publicUrl = isEnvProduction && publicPath ? publicPath.slice(0, -1) : isEnvDevelopment && "";
   const env = getClientEnvironment(publicUrl);
+
+  const shouldUseRelativeAssetPaths = publicPath === "./";
 
   return {
     mode: isEnvProduction ? "production" : "development",
@@ -62,28 +66,51 @@ export const configFactory = (webpackEnv: "development" | "production"): webpack
       runtimeChunk: true,
     },
     module: {
+      strictExportPresence: true,
       rules: [
-        defaultRules.cacheLoader,
-        defaultRules.sourceMapLoader,
-        defaultRules.tsLoader,
-        defaultRules.htmlLoader,
-        defaultRules.urlLoader,
-        defaultRules.styleLoader,
+        // Disable require.ensure as it's not a standard language feature.
+        { parser: { requireEnsure: false } },
+        defaultRules.BabelLoader(),
+        defaultRules.assetsLoader({ isEnvDevelopment, isEnvProduction, shouldUseRelativeAssetPaths }),
       ],
     },
     plugins: [
-      plugins.ForkTsCheckerWebpackPlugin(),
       plugins.HtmlWebpackPlugin({ isEnvProduction }),
       isEnvProduction && shouldInlineRuntimeChunk && plugins.InlineChunkHtmlPlugin,
       plugins.InterpolateHtmlPlugin(env),
-      // plugins.ModuleNotFoundPlugin(paths),
+      plugins.ModuleNotFoundPlugin(paths),
       plugins.DefinePlugin(env),
-      plugins.MiniCssExtractPlugin(),
+      isEnvDevelopment && plugins.HotModuleReplacementPlugin(),
+      isEnvDevelopment && plugins.CaseSensitivePathsPlugin(),
+      isEnvProduction && plugins.MiniCssExtractPlugin(),
+      publicPath && plugins.ManifestPlugin({ publicPath }),
+      plugins.IgnorePlugin(),
+      isEnvProduction && publicUrl && plugins.WorkboxWebpackPlugin({ publicUrl }),
+      plugins.ForkTsCheckerWebpackPlugin({ isEnvDevelopment, isEnvProduction }),
     ].filter(Boolean),
+    resolveLoader: {
+      plugins: [
+        // Also related to Plug'n'Play, but this time it tells Webpack to load its loaders
+        // from the current package.
+        PnpWebpackPlugin.moduleLoader(module),
+      ],
+    },
     resolve: {
       extensions: moduleFileExtensions,
       alias: commonConfig.alias,
+      plugins: [
+        // Adds support for installing with Plug'n'Play, leading to faster installs and adding
+        // guards against forgotten dependencies and such.
+        PnpWebpackPlugin,
+        // Prevents users from importing files from outside of src/ (or node_modules/).
+        // This often causes confusion because we only process files within src/ with babel.
+        // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
+        // please link the files into your node_modules/ and let module-resolution kick in.
+        // Make sure your source files are compiled, as they will not be processed in any way.
+        new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
+      ],
     },
     node: commonConfig.nodepPolyfill,
+    performance: false,
   };
 };

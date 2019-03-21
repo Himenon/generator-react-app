@@ -1,4 +1,5 @@
 import * as React from "react";
+const styles = require("./style.scss");
 
 export class HelloWorld extends React.Component<{}, { count: number }> {
   constructor(props: {}) {
@@ -10,7 +11,7 @@ export class HelloWorld extends React.Component<{}, { count: number }> {
   }
   public render() {
     return (
-      <div className="app">
+      <div className={styles.app}>
         <h1>Hello world {this.state.count}</h1>
         <button onClick={this.myClick}>COUNT UP</button>
       </div>

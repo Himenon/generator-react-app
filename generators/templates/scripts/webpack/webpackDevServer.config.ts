@@ -81,7 +81,6 @@ export const createDevServerConfig = (proxy, allowedHost): WebpackDevServer.Conf
     },
     public: allowedHost,
     proxy,
-    // @ts-ignore TODO wait pr merged https://github.com/DefinitelyTyped/DefinitelyTyped/pull/33559
     before(app: express.Application, server: WebpackDevServer) {
       if (fs.existsSync(paths.proxySetup)) {
         // This registers user provided middleware for proxy reasons

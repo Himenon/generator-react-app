@@ -1,58 +1,8 @@
 import * as MiniCssExtractPlugin from "mini-css-extract-plugin";
 import * as webpack from "webpack";
-import { paths } from "../../config/paths";
 
-export const rules: { [key: string]: webpack.Rule } = {
-  sourceMapLoader: {
-    test: /\.(js|jsx|mjs)$/,
-    loader: "source-map-loader",
-    enforce: "pre",
-    include: paths.appSrc,
-  },
-  cacheLoader: {
-    loader: "cache-loader",
-  },
-  tsLoader: {
-    test: /\.tsx?$/,
-    use: [
-      {
-        loader: "ts-loader",
-        options: {
-          transpileOnly: true,
-          experimentalWatchApi: true,
-        },
-      },
-    ],
-  },
-  htmlLoader: {
-    test: /\.html$/,
-    loader: "html-loader",
-  },
-  urlLoader: {
-    test: /\.(jpe?g|png|eot|svg|gif|woff2?|ttf)$/,
-    use: [
-      {
-        // file-loader, mime, url-loaderが必要
-        loader: "url-loader",
-        options: {
-          limit: 10000,
-          name: "assets/[name].[ext]?[hash]",
-        },
-      },
-    ],
-  },
-  fileLoader: {
-    test: /\.(jpe?g|png|eot|svg|gif|woff2?|ttf)$/,
-    use: [
-      {
-        loader: "file-loader",
-        options: {
-          name: "assets/[name].[ext]",
-        },
-      },
-    ],
-  },
-  styleLoader: {
+export const generateRule = (): webpack.Rule => {
+  return {
     test: /\.(scss|css)$/,
     exclude: /node_modules/,
     use: [
@@ -78,7 +28,6 @@ export const rules: { [key: string]: webpack.Rule } = {
           localIdentName: "___[local]___[hash:base64:5]",
         },
       },
-      "resolve-url-loader",
       {
         loader: "postcss-loader",
         options: {
@@ -95,5 +44,5 @@ export const rules: { [key: string]: webpack.Rule } = {
       },
       "sass-loader",
     ],
-  },
+  };
 };
