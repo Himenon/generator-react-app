@@ -26,6 +26,7 @@
   "scripts": {
     "build": "yarn run clean && yarn run build:scripts && node scripts/build.js",
     "build:scripts": "tsc -p tsconfig.scripts.json",
+    "build:style": "webpack --config ./scripts/style.js",
     "ci:notify:release": "ts-node ./scripts/notify.ts",
     "clean": "rimraf ./lib ./build",
     "cli": "node ./lib/cli.js",
@@ -45,6 +46,14 @@
     "version_up:major": "changelog -M && git add CHANGELOG.md && git commit -m \"chore(change-log): updated CHANGELOG.md\" && npm version major",
     "version_up:minor": "changelog -m && git add CHANGELOG.md && git commit -m \"chore(change-log): updated CHANGELOG.md\" && npm version minor",
     "version_up:patch": "changelog -p && git add CHANGELOG.md && git commit -m \"chore(change-log): updated CHANGELOG.md\" && npm version patch"
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "dependencies": {},
   "devDependencies": {}

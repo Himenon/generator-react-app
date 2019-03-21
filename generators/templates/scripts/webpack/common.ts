@@ -16,11 +16,11 @@ export const externals: webpack.ExternalsElement | webpack.ExternalsElement[] = 
 export const alias: { [key: string]: string } = {};
 
 export const nodepPolyfill: webpack.Node | false = {
+  module: "empty",
   dgram: "empty",
+  dns: "mock",
   fs: "empty",
   net: "empty",
   tls: "empty",
   child_process: "empty",
-  __dirname: false,
-  __filename: false,
 };
