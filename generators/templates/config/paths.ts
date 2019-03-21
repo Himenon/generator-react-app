@@ -39,6 +39,7 @@ export const paths = {
   dotenv: resolveApp(".env"),
   appPath: resolveApp("."),
   appBuild: resolveApp("build"),
+  appLib: resolveApp("lib"),
   appPublic: resolveApp("public"),
   appHtml: resolveApp("public/index.html"),
   appIndexJs: resolveApp("src/index.tsx"),

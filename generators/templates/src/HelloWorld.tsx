@@ -21,4 +21,3 @@ export class HelloWorld extends React.Component<{}, { count: number }> {
     this.setState({ count: this.state.count + 1 });
   }
 }
-a
