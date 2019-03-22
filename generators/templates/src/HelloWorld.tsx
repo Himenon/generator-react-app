@@ -1,8 +1,12 @@
 import * as React from "react";
 const styles = require("./style.scss");
 
-export class HelloWorld extends React.Component<{}, { count: number }> {
-  constructor(props: {}) {
+interface HelloWorldProps {
+  name: string;
+}
+
+class HelloWorld extends React.Component<HelloWorldProps, { count: number }> {
+  constructor(props: HelloWorldProps) {
     super(props);
     this.state = {
       count: 0,
@@ -21,3 +25,5 @@ export class HelloWorld extends React.Component<{}, { count: number }> {
     this.setState({ count: this.state.count + 1 });
   }
 }
+
+export { HelloWorldProps as Props, HelloWorld as Component };

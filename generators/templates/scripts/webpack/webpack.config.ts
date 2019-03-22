@@ -70,8 +70,9 @@ export const configFactory = (webpackEnv: "development" | "production"): webpack
       rules: [
         // Disable require.ensure as it's not a standard language feature.
         { parser: { requireEnsure: false } },
-        defaultRules.BabelLoader(),
+        defaultRules.babelLoader(),
         defaultRules.assetsLoader({ isEnvDevelopment, isEnvProduction, shouldUseRelativeAssetPaths }),
+        defaultRules.tsLoader(),
       ],
     },
     plugins: [
