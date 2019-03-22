@@ -9,7 +9,7 @@ import * as TsLoader from "./TsLoader";
 import * as UrlLoader from "./UrlLoader";
 
 export const rules = {
-  BabelLoader: BabelLoader.generateRule,
+  babelLoader: BabelLoader.generateRule,
   sourceMapLoader: SourceMapLoader.generateRule,
   cacheLoader: CacheLoader.generateRule,
   tsLoader: TsLoader.generateRule,
