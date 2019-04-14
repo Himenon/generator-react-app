@@ -177,7 +177,7 @@ export = class extends Generator {
       "url-loader",
       "webpack",
       "webpack-cli",
-      "webpack-dev-server",
+      "webpack-dev-server@^3.2.1",
       "webpack-manifest-plugin",
       "workbox-webpack-plugin",
     ];
