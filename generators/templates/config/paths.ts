@@ -3,7 +3,7 @@ import * as path from "path";
 
 const appDirectory = fs.realpathSync(process.cwd());
 
-const resolveApp = (relativePath: string) => path.resolve(appDirectory, relativePath);
+export const resolveApp = (relativePath: string) => path.resolve(appDirectory, relativePath);
 
 // tslint:disable-next-line:max-line-length
 export const moduleFileExtensions = [".mjs", ".web.ts", ".ts", ".web.tsx", ".tsx", ".web.js", ".js", ".json", ".web.jsx", ".jsx"];

@@ -38,6 +38,12 @@ yarn run build
 yarn link
 ```
 
+Check
+
+```
+yo @pickel-project/react-app
+```
+
 ## License
 
 MIT &copy; [Himenon](https://github.com/Himenon)
