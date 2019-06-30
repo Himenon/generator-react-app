@@ -20,13 +20,13 @@
   "author": {
     "name": "Himenon",
     "email": "k.himneo314@gmail.com",
-    "url": "https://twitter.com/Himenon"
+    "url": "https://twitter.com/himenoglyph"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/himenon/generator-react-app/issues"
+    "url": "https://github.com/Himenon/generator-react-app/issues"
   },
-  "homepage": "https://github.com/himenon/generator-react-app#readme",
+  "homepage": "https://github.com/Himenon/generator-react-app#readme",
   "devDependencies": {
     "@types/read-pkg-up": "^3.0.1",
     "@types/underscore.string": "^0.0.38",
