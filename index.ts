@@ -26,43 +26,52 @@ export = class extends Generator {
   }
 
   public async _prompting(): Promise<PromptResult> {
-    const pkg: {[k: string]: any} | undefined = ReadPkgUp.sync({ normalize: false }).pkg;
+    const readResult = ReadPkgUp.sync({ normalize: false });
+    const pkg = readResult ? readResult.package : {};
+    const author = pkg.author;
+    const inputAuthor = typeof author === "string" ? {
+      name: author,
+    } : {
+      name: author && author.name,
+      email: author && author.email,
+      url: author && author.url,
+    };
     const questions: PromptQuestion[] = [
       {
         type: "input",
         name: "projectName",
         message: "Your project name",
-        default: pkg && pkg.name || _s.slugify(this.appname), // Default to current folder name
+        default: pkg.name || _s.slugify(this.appname), // Default to current folder name
       },
       {
         type: "input",
         name: "description",
         message: "Project description",
-        default: pkg && pkg.description,
+        default: pkg.description,
       },
       {
         type: "input",
         name: "repositoryName",
         message: "Repository name",
-        default: pkg && pkg.repository,
+        default: pkg.repository,
       },
       {
         type: "input",
         name: "authorName",
         message: "Author name",
-        default: pkg && pkg.author && pkg.author.name,
+        default: inputAuthor.name,
       },
       {
         type: "input",
         name: "authorEmail",
         message: "Author email",
-        default: pkg && pkg.author && pkg.author.email,
+        default: inputAuthor.email,
       },
       {
         type: "input",
         name: "authorUrl",
         message: "Profile url",
-        default: pkg && pkg.author && pkg.author.url,
+        default: inputAuthor.url,
       },
     ]
     return await this.prompt(questions) as PromptResult;
