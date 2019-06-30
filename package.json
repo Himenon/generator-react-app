@@ -1,6 +1,6 @@
 {
   "name": "@himenon/generator-react-app",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "React Application bootstrap.",
   "scripts": {
     "start": "yarn run build:watch",
