@@ -13,11 +13,11 @@
 
 ```
 # in generator-react-app
-yarn remove @pickel-project/generator-react-app
+yarn remove @himenon/generator-react-app
 yarn
 yarn build
 yarn global add
 
 # another directory
-yo @pickel-project/react-app
+yo @himenon/react-app
 ```
